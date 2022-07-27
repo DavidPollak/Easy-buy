@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Retalix.StoreServices.BusinessComponents.Product.Legacy.Item" assembly="Retalix.StoreServices.BusinessComponents.Product">
+	<class name="Consumable" table="CAT_Product">
+
+		<id name="EntityKey" column="Product_Id" type="AnsiString" length="40" />
+		<component name="Weight" class="Retalix.StoreServices.Model.Product.Weight,Retalix.StoreServices.Model">
+			<property name="Value" column="Weight" />
+			<property name="UnitOfMeasureType" column="UnitOfMeasure" type="string" length="20" />
+		</component>
+		<many-to-one name="MerchandiseCategory" column="MerchandiseCategoryFk" entity-name="IMerchandiseCategory" foreign-key="none" />
+		<property name="IsManualPercentageEnable" column="IsManualPercentageEnable" not-null="true" type="bool" />
+		<property name="IsNonMerchandise" column="IsNonMerchandise" not-null="true" type="bool" />
+		<bag name="Identifiers" table="CAT_ProductIdentifier">
+			<key column="Product_Id" not-null="true" foreign-key="none" />
+			<composite-element class="Retalix.StoreServices.Model.Product.Identifier, Retalix.StoreServices.Model">
+				<property name="Code" column="Code" not-null="true" type="string" length="60" />
+				<property name="Type" column="Type" not-null="true" type="string" length="20" />
+        <nested-composite-element  name="LastUpdated" class="Retalix.StoreServices.Model.Infrastructure.Globalization.NominalDateTime, Retalix.StoreServices.Model" >
+          <property name="NominalValue" column="LastUpdated" type="datetime" not-null="false"/>
+        </nested-composite-element>
+			</composite-element>
+		</bag>
+		<bag name="Descriptions" table="CAT_ProductDescription">
+			<key column="Product_Id" not-null="true" foreign-key="none"/>
+			<composite-element class="Retalix.StoreServices.Model.Product.ProductDescription, Retalix.StoreServices.Model">
+				<property name="Culture" column="Culture" not-null="true" type="AnsiString" length="10"/>
+				<property name="Type" column="Type" not-null="true" type="AnsiString" length="10"/>
+				<property name="Value" column="Value" not-null="true" type="string" length="255"/>
+			</composite-element>
+		</bag>
+		<bag name="ImageNames" table="CAT_ProductImage">
+			<key column="Product_Id" not-null="true" foreign-key="none" />
+			<element column="ImageName" not-null="true" type="string" length="255" />
+		</bag>
+		<set name="TareWeightPercentages" table="CAT_ProductTarePercentageData">
+			<key column="Product_Id" not-null="true" foreign-key="none" />
+			<element column="PercentageTareWeight" not-null="true" type="decimal" precision="19" scale="5" />
+		</set>
+		<set name="AssociationList" cascade="all-delete-orphan" inverse="true">
+			<key column="FromProduct" not-null="true" foreign-key="none" />
+			<one-to-many class="Retalix.StoreServices.BusinessComponents.Product.Association.AssociationBaseDto" />
+		</set>
+		<set name="AssociatedByList" cascade="none" inverse="true">
+			<key column="ToProduct" not-null="true" foreign-key="none" />
+			<one-to-many class="Retalix.StoreServices.BusinessComponents.Product.Association.AssociationBaseDto" />
+		</set>
+	    <set name="LinkedGroups" table="CAT_ProductToLinkGroup">
+				<key column="Product_Id" not-null="true" foreign-key="none" />
+	      <many-to-many class="Retalix.StoreServices.BusinessComponents.Product.LinkGroup.LinkGroup" foreign-key="none" not-found="ignore">
+	        <column name="LinkGroup_Id" />
+	        <column name="BusinessUnit_Id" />
+	      </many-to-many>
+	    </set>
+	    <bag name="ProductAttributes" table="CAT_ProductAttributes" cascade="all-delete-orphan">
+			<key column="Product_Id" not-null="true" foreign-key="none" />
+			<one-to-many class="Retalix.StoreServices.Model.Product.ProductAttribute.IProductAttribute"  />
+		</bag>
+    <join table="CAT_ProductCalorie" optional="true">
+      <key column="Product_Id" />
+        <component name="Calories" class="Retalix.StoreServices.Model.Product.Calorie.ProductCalories,Retalix.StoreServices.Model">
+          <component name="Measure" class="Retalix.StoreServices.Model.Price.Quantity,Retalix.StoreServices.Model">
+            <component name="UnitOfMeasure" class="Retalix.StoreServices.Model.Price.UnitOfMeasure, Retalix.StoreServices.Model">
+              <property name="Unit" column="ProductUom" type="string" length="20" />
+            </component>
+            <property name="Units" column="ProductQuantity" type="decimal" precision="9" scale="3"/>
+          </component>
+          <component name="BasicValue" class="Retalix.StoreServices.Model.Product.Calorie.CalorieQuantity,Retalix.StoreServices.Model">
+            <property name="Units" column="CalorieBasicValue" type="decimal" precision="9" scale="3"/>
+            <property name="EntryMethod" column="CalorieBasicEntryMethod" type="string" length="10" />
+          </component>
+          <component name="MinValue" class="Retalix.StoreServices.Model.Product.Calorie.CalorieQuantity,Retalix.StoreServices.Model">
+            <property name="Units" column="CalorieMinValue" type="decimal" precision="9" scale="3"/>
+            <property name="EntryMethod" column="CalorieMinEntryMethod" type="string" length="10" />
+          </component>
+          <component name="MaxValue" class="Retalix.StoreServices.Model.Product.Calorie.CalorieQuantity,Retalix.StoreServices.Model">
+            <property name="Units" column="CalorieMaxValue" type="decimal" precision="9" scale="3"/>
+            <property name="EntryMethod" column="CalorieMaxEntryMethod" type="string" length="10" />
+          </component>
+          <property name="DisplayMode" column="CalorieDisplayMode" type="string"/>
+        </component>
+    </join>
+  </class>
+  
+    <class name="Retalix.StoreServices.Model.Product.ProductAttribute.IProductAttribute,Retalix.StoreServices.Model" table="CAT_ProductAttributes" lazy="false">
+		<id column="ProductAttribute_Id" name="Id">
+			<generator class="guid" />
+		</id>
+		<property name="Key" column="AttributeKey" not-null="true" type="string" length="50"/>
+		<property name="Type" column="AttributeType" not-null="true" type="string" length="50"/>
+
+		<joined-subclass name="Retalix.StoreServices.Model.Product.ProductAttribute.IntegerAttribute, Retalix.StoreServices.Model" extends="Retalix.StoreServices.Model.Product.ProductAttribute.IProductAttribute,Retalix.StoreServices.Model"
+					  lazy="false" table="CAT_ProductIntegerAttributes">
+			<key column="ProductAttribute_Id" />
+			<property name="IntegerValue" column="AttributeValue" type="int"/>
+		</joined-subclass>
+
+		<joined-subclass name="Retalix.StoreServices.Model.Product.ProductAttribute.StringAttribute, Retalix.StoreServices.Model" extends="Retalix.StoreServices.Model.Product.ProductAttribute.IProductAttribute,Retalix.StoreServices.Model"
+				  lazy="false" table="CAT_ProductStringAttributes">
+			<key column="ProductAttribute_Id" />
+			<property name="StringValue" column="AttributeValue" type="string" length="255"/>
+		</joined-subclass>
+
+		<joined-subclass name="Retalix.StoreServices.Model.Product.ProductAttribute.DecimalAttribute, Retalix.StoreServices.Model" extends="Retalix.StoreServices.Model.Product.ProductAttribute.IProductAttribute,Retalix.StoreServices.Model"
+				  lazy="false" table="CAT_ProductDecimalAttributes">
+			<key column="ProductAttribute_Id" />
+			<property name="DecimalValue" column="AttributeValue" type="decimal"/>
+		</joined-subclass>
+
+		<joined-subclass name="Retalix.StoreServices.Model.Product.ProductAttribute.DateAttribute, Retalix.StoreServices.Model" extends="Retalix.StoreServices.Model.Product.ProductAttribute.IProductAttribute,Retalix.StoreServices.Model"
+				  lazy="false" table="CAT_ProductDateAttributes">
+			<key column="ProductAttribute_Id" />
+			<property name="DateValue" column="AttributeValue" type="DateTime"/>
+		</joined-subclass>
+	</class>
+
+	<query name="GetConsumableByIds">from Consumable C where C.EntityKey IN (:ids)</query>
+	<query name="GetConsumableById">from Consumable C where C.EntityKey = :id</query>
+	<query name="GetProductByIdentifier">
+		select distinct C from Consumable C
+		left join C.Identifiers Identifiers
+		where Identifiers.Code = :code and Identifiers.Type = :type
+	</query>
+
+	<query name="GetProductByCategory">
+		select distinct C from Consumable C
+		inner join C.MerchandiseCategory merch
+		where merch.Id = :category
+	</query>
+</hibernate-mapping>
