@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <LinearGradientBrush x:Key="ApplicationLogoTopBorderBrush"
+                          EndPoint="1,0.5"
+                          StartPoint="0,0.5">
+        <GradientStop Color="#54B948"
+                      Offset="0" />
+        <GradientStop Color="#00A77E"
+                      Offset="0.89" />
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="ApplicationLogoBackgroundBrush"
+                      Color="#243340" />
+    <SolidColorBrush x:Key="ApplicationLogoForegroundBrush"
+                      Color="White" />
+    <SolidColorBrush x:Key="HeaderBackgroundBrush"
+                      Color="#2E4051" />
+    <SolidColorBrush x:Key="HeaderForegroundBrush"
+                      Color="White" />
+    <LinearGradientBrush x:Key="HeaderBorderBrush"
+                          EndPoint="1,0.5"
+                          StartPoint="0,0.5">
+        <GradientStop Color="#54B948"
+                      Offset="0" />
+        <GradientStop Color="#00A77E"
+                      Offset="0.89" />
+    </LinearGradientBrush>
+    <ImageBrush  x:Key="NcrLogo"
+                 ImageSource="../Resources/Images/ncr_logo.png" />
+</ResourceDictionary>

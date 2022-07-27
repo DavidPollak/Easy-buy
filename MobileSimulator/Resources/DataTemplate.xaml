@@ -1,0 +1,722 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:MobileSimulator.Views.Converters;assembly=MobileSimulator.Views"
+                    xmlns:controls="clr-namespace:MobileSimulator.Infrastructure.Controls;assembly=MobileSimulator.Infrastructure">
+    <DrawingImage x:Key="DrawingImage">
+        <DrawingImage.Drawing>
+            <GeometryDrawing Brush="Gray"
+                                 Geometry="M2.28,3L1,4.27L3,6.27V19A2,2 0 0,0 5,21H17.73L19.73,23L21,21.72L2.28,3M4.83,3L21,19.17V5C21,3.89 20.1,3 19,3H4.83M8.5,13.5L11,16.5L12,15.25L14.73,18H5L8.5,13.5Z" />
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    <DrawingImage x:Key="OfferDrawingImage">
+        <DrawingImage.Drawing>
+            <GeometryDrawing Brush="LightSeaGreen"
+                                 Geometry="M21,3H3C2,3 1,4 1,5V19A2,2 0 0,0 3,21H21C22,21 23,20 23,19V5C23,4 22,3 21,3M5,17L8.5,12.5L11,15.5L14.5,11L19,17H5Z" />
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    <DataTemplate x:Key="LoyaltyRewardItemDataTemplate">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Viewbox Width="24"
+                         Height="24"
+                         Margin="3,5"
+                         Grid.Column="0"
+                         Grid.Row="0"
+                         Grid.RowSpan="2">
+                    <Canvas Width="24" 
+                            Height="24">
+                        <Path Data="M15,14C12.33,14 7,15.33 7,18V20H23V18C23,15.33 17.67,14 15,14M15,12A4,4 0 0,0 19,8A4,4 0 0,0 15,4A4,4 0 0,0 11,8A4,4 0 0,0 15,12M5,13.28L7.45,14.77L6.8,11.96L9,10.08L6.11,9.83L5,7.19L3.87,9.83L1,10.08L3.18,11.96L2.5,14.77L5,13.28Z"
+                              Fill="#1abc9c" />
+                    </Canvas>
+                </Viewbox>
+
+                <TextBlock Text="{Binding Name}"
+                               FontSize="20"
+                               Foreground="#1abc9c"
+                               Grid.Row="0"
+                               Grid.Column="1"/>
+
+                <TextBlock Text="{Binding Description}"
+                               TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Center" 
+                               FontSize="14"
+                           FontWeight="Medium"
+                                Foreground="#1abc9c"
+                               Grid.Column="1"
+                               Grid.Row="0"
+                               Grid.RowSpan="2"/>
+
+
+                <TextBlock Margin="0,2"
+                           Grid.Column="2"
+                           VerticalAlignment="Center" 
+                           Text="{Binding Price, StringFormat='{}{0} points'}"
+                           Grid.Row="0"
+                           Grid.RowSpan="2"/>
+            </Grid>
+            <Separator Background="LightGray"
+                           Grid.Row="1"/>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="PromotionItemDataTemplate">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Viewbox Width="24" 
+                         Height="24"
+                         Margin="3,5"
+                         Grid.Column="0"
+                         Grid.Row="0"
+                         Grid.RowSpan="2">
+                    <Canvas Width="24" Height="24">
+                        <Path Data="M18.65,2.85L19.26,6.71L22.77,8.5L21,12L22.78,15.5L19.24,17.29L18.63,21.15L14.74,20.54L11.97,23.3L9.19,20.5L5.33,21.14L4.71,17.25L1.22,15.47L3,11.97L1.23,8.5L4.74,6.69L5.35,2.86L9.22,3.5L12,0.69L14.77,3.46L18.65,2.85M9.5,7A1.5,1.5 0 0,0 8,8.5A1.5,1.5 0 0,0 9.5,10A1.5,1.5 0 0,0 11,8.5A1.5,1.5 0 0,0 9.5,7M14.5,14A1.5,1.5 0 0,0 13,15.5A1.5,1.5 0 0,0 14.5,17A1.5,1.5 0 0,0 16,15.5A1.5,1.5 0 0,0 14.5,14M8.41,17L17,8.41L15.59,7L7,15.59L8.41,17Z" 
+                              Fill="#FE5F55" />
+                    </Canvas>
+                </Viewbox>
+                <TextBlock Text="{Binding Name}"
+                               FontSize="20"
+                               Foreground="Black"
+                               FontWeight="Bold"
+                               Grid.Row="0"
+                               Grid.Column="1"/>
+                <TextBlock Text="{Binding Description}"
+                               TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Center" 
+                               FontSize="14"
+                               FontWeight="Medium"
+                               Grid.Column="1"
+                               Grid.Row="0"
+                               Grid.RowSpan="2"/>
+                <TextBlock Margin="0,2"
+                           Grid.Column="2"
+                           VerticalAlignment="Center" 
+                           Text="{Binding Price, StringFormat='{}{0:C2}', ConverterCulture=en-GB}"
+                           Grid.Row="0"
+                           Grid.RowSpan="2"/>
+            </Grid>
+            <Separator Background="LightGray"
+                           Grid.Row="1"/>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="SaleItemDataTemplate">
+        <DataTemplate.Resources>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </DataTemplate.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Image Source="{Binding Image, TargetNullValue={StaticResource DrawingImage}}"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Stretch"
+                               Margin="10,0"
+                               Grid.Column="0"
+                               Grid.Row="0"
+                               Grid.RowSpan="2"/>
+                <TextBlock Text="{Binding Description}"
+                               TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Center" 
+                           HorizontalAlignment="Stretch"
+                           FontWeight="Medium"
+                               FontSize="16"
+                               Grid.Column="1"
+                               Grid.Row="0"
+                               Grid.RowSpan="2"/>
+                <TextBlock Margin="20,0"
+                           Grid.Column="2"
+                           VerticalAlignment="Center" 
+                           Grid.Row="0">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat='{}{0} {1}'>
+                            <Binding Path="Quantity"/>
+                            <Binding Path="UnitOfMeasure"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock Margin="20,0"
+                           Grid.Column="2"
+                               VerticalAlignment="Center" 
+                               Text="{Binding Price, StringFormat='{}{0:C2}', ConverterCulture=en-AU}"
+                           Grid.Row="1"/>
+            </Grid>
+            <Separator Background="LightGray"
+                           VerticalAlignment="Bottom"
+                           Grid.Row="1"/>
+            </Grid>
+         
+        </DataTemplate>
+    <DataTemplate x:Key="RelativeItemDataTemplate">
+        <DataTemplate.Resources>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <converters:HasValueVisibilityConverter x:Key="HasValueVisibilityConverter"/>
+        </DataTemplate.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Image Source="{Binding Image}"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Stretch"
+                               Margin="10,0"
+                               Grid.Column="0"
+                               Grid.Row="0"
+                               Grid.RowSpan="2"/>
+                <TextBlock Text="{Binding Description}"
+                               TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Center" 
+                               HorizontalAlignment="Stretch"
+                               FontWeight="Medium"
+                               Foreground="{Binding TextColor}"
+                               FontSize="16"
+                               Grid.Column="1"
+                               Grid.Row="0"
+                               Grid.RowSpan="2"/>
+                <TextBlock Margin="20,0" Text="Aisle"
+                           Grid.Column="2"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Center"
+                           Visibility="{Binding Aisle, Converter={StaticResource HasValueVisibilityConverter}}"
+                           Grid.Row="0"/>
+                <TextBlock Margin="20,0" Text="{Binding Aisle}"
+                           Grid.Column="2"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Center"
+                           Grid.Row="1"/>
+                <TextBlock Margin="20,0" Text="{Binding UnitOfMeasure}"
+                           Grid.Column="3"
+                           VerticalAlignment="Center" 
+                           Grid.Row="0">
+                </TextBlock>
+                <TextBlock Margin="20,0"
+                           Grid.Column="3"
+                           VerticalAlignment="Center" 
+                           Text="{Binding FormattedPrice}"
+                           Visibility="{Binding FormattedPrice, Converter={StaticResource HasValueVisibilityConverter}}"
+                           Grid.Row="1"/>
+                <controls:ImageButton Opacity="1"
+                                      Margin="0,0,0,-30"
+                                      Grid.Column="4"
+                                      Grid.Row="0"
+                                      Grid.RowSpan="2"
+                                      Background="Red"
+                                      ImagePath="M23,12L20.56,14.78L20.9,18.46L17.29,19.28L15.4,22.46L12,21L8.6,22.47L6.71,19.29L3.1,18.47L3.44,14.78L1,12L3.44,9.21L3.1,5.53L6.71,4.72L8.6,1.54L12,3L15.4,1.54L17.29,4.72L20.9,5.54L20.56,9.22L23,12M20.33,12L18.5,9.89L18.74,7.1L16,6.5L14.58,4.07L12,5.18L9.42,4.07L8,6.5L5.26,7.09L5.5,9.88L3.67,12L5.5,14.1L5.26,16.9L8,17.5L9.42,19.93L12,18.81L14.58,19.92L16,17.5L18.74,16.89L18.5,14.1L20.33,12M11,15H13V17H11V15M11,7H13V13H11V7"
+                                      Height="60"
+                                      Width="60"
+                                      Style="{DynamicResource SmallCircleColorButton}"
+                                      Visibility="{Binding Promotion, Converter={StaticResource HasValueVisibilityConverter}}"
+                                      CommandParameter="{Binding Path=Id}"
+                                      Command="{Binding Path=DataContext.ShowPromotionCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}}"
+                />
+
+
+            </Grid>
+            <Separator Background="LightGray"
+                           VerticalAlignment="Bottom"
+                           Grid.Row="1"/>
+        </Grid>
+
+    </DataTemplate>
+    <DataTemplate x:Key="ShoppingListItemDataTemplate">
+        <DataTemplate.Resources>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </DataTemplate.Resources>
+        <Grid>
+            <!--<Grid.InputBindings>
+                <MouseBinding Gesture="LeftDoubleClick"    
+                              Command="{Binding Path=DataContext.ShowListDetailCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}}" />
+            </Grid.InputBindings>-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Image Source="{Binding Image, TargetNullValue={StaticResource DrawingImage}}"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Stretch"
+                               Margin="10,0"
+                               Grid.Column="0"
+                               Grid.Row="0"
+                               Grid.RowSpan="2"/>
+                <TextBlock Text="{Binding Name}"
+                           TextTrimming="CharacterEllipsis"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Stretch"
+                           FontWeight="Medium"
+                           FontSize="16"
+                           Grid.Column="1"
+                           Grid.Row="0"/>
+                <TextBlock Text="{Binding LastModifiedDate, StringFormat='Last updated: {0:g}'}"
+                           TextTrimming="CharacterEllipsis"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Stretch"
+                           FontWeight="Medium"
+                           Foreground="Gray"
+                           FontSize="10"
+                           Grid.Column="1"
+                           Grid.Row="1"/>
+                <StackPanel Grid.Column="3"
+                      Grid.Row="0"
+                      Grid.RowSpan="2"
+                            Margin="20,0"
+                            Orientation="Vertical">
+                    <TextBlock Text="{Binding ItemsCount}"
+                           FontSize="20"
+                           Margin="0,0,0,-2"
+                           Foreground="Black"
+                           FontWeight="Bold"
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Center"/>
+                    <TextBlock Text="items"
+                           FontSize="12"
+                           Margin="0,0,0,-2"
+                           Foreground="Black"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Center"/>
+                </StackPanel>
+                <controls:ImageButton Foreground="Gray"
+                                      Margin="-10,0"
+                                      ImagePath="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"
+                                      Height="60"
+                                      Width="60"
+                                      Grid.Column="4"
+                                      Grid.Row="0"
+                                      Grid.RowSpan="2"
+                                      Style="{DynamicResource TransparentNoTextButton}"
+                                      Command="{Binding Path=DataContext.ShowListDetailCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}}"
+                                      CommandParameter="{Binding Id}"/>
+               
+            </Grid>
+            <Separator Background="LightGray"
+                           VerticalAlignment="Bottom"
+                           Grid.Row="1"/>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="ShoppingListItemDetailsDataTemplate">
+        <DataTemplate.Resources>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </DataTemplate.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="90"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Image Source="{Binding Image, TargetNullValue={StaticResource DrawingImage}}"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Stretch"
+                               Margin="10,0"
+                               Grid.Column="0"
+                               Grid.Row="0"
+                               Grid.RowSpan="2"/>
+               
+                <TextBlock Text="{Binding Description}"
+                               TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Center" 
+                           HorizontalAlignment="Stretch"
+                           FontWeight="Medium"
+                               FontSize="16"
+                               Grid.Column="1"
+                               Grid.Row="0"
+                               Grid.RowSpan="2"/>
+                <TextBlock Margin="20,0"
+                           Grid.Column="2"
+                           VerticalAlignment="Center" 
+                           Grid.Row="0">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat='{}{0} {1}'>
+                            <Binding Path="Quantity"/>
+                            <Binding Path="UnitOfMeasure"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock Margin="20,0"
+                           Grid.Column="2"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center" 
+                           Text="{Binding Price, StringFormat='{}{0:C2}', ConverterCulture=en-GB}"
+                           Grid.Row="1"/>
+            </Grid>
+            <Separator Background="LightGray"
+                       Margin="0"
+                       VerticalAlignment="Bottom"
+                       Grid.Row="1"/>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="FreeTextShoppingListItemDetailsDataTemplate">
+        <DataTemplate.Resources>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </DataTemplate.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="90"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Viewbox Width="22" 
+                         Height="22"
+                         Margin="10,0"
+                          Grid.Column="0"
+                               Grid.Row="0"
+                               Grid.RowSpan="2">
+                    <Canvas Width="24" Height="24">
+                        <Path Data="M20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20M4,6V18H20V6H4M6,9H18V11H6V9M6,13H16V15H6V13Z"
+                              Fill="Gray" />
+                    </Canvas>
+                </Viewbox>
+                <TextBlock Text="{Binding Description}"
+                               TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Center" 
+                           HorizontalAlignment="Stretch"
+                           FontWeight="Medium"
+                               FontSize="16"
+                               Grid.Column="1"
+                               Grid.Row="0"
+                               Grid.RowSpan="2"/>
+                <TextBlock Margin="20,0"
+                           Grid.Column="2"
+                           VerticalAlignment="Center" 
+                           Grid.Row="0"
+                           Grid.RowSpan="2">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat='{}{0} {1}'>
+                            <Binding Path="Quantity"/>
+                            <Binding Path="UnitOfMeasure"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </Grid>
+            <Separator Background="LightGray"
+                       VerticalAlignment="Bottom"
+                       Grid.Row="1"/>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="PromotionShoppingListItemDetailsDataTemplate">
+        <DataTemplate.Resources>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </DataTemplate.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Viewbox Width="24" 
+                         Height="24"
+                         HorizontalAlignment="Center"
+                         Grid.Column="0"
+                         Grid.Row="0"
+                         Grid.RowSpan="2">
+                    <Canvas Width="24" Height="24">
+                        <Path Data="M18.65,2.85L19.26,6.71L22.77,8.5L21,12L22.78,15.5L19.24,17.29L18.63,21.15L14.74,20.54L11.97,23.3L9.19,20.5L5.33,21.14L4.71,17.25L1.22,15.47L3,11.97L1.23,8.5L4.74,6.69L5.35,2.86L9.22,3.5L12,0.69L14.77,3.46L18.65,2.85M9.5,7A1.5,1.5 0 0,0 8,8.5A1.5,1.5 0 0,0 9.5,10A1.5,1.5 0 0,0 11,8.5A1.5,1.5 0 0,0 9.5,7M14.5,14A1.5,1.5 0 0,0 13,15.5A1.5,1.5 0 0,0 14.5,17A1.5,1.5 0 0,0 16,15.5A1.5,1.5 0 0,0 14.5,14M8.41,17L17,8.41L15.59,7L7,15.59L8.41,17Z" 
+                              Fill="#FE5F55" />
+                    </Canvas>
+                </Viewbox>
+
+                <TextBlock Text="{Binding Promotion.Description[0].Value}"
+                               TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Center" 
+                           HorizontalAlignment="Stretch"
+                           FontWeight="Medium"
+                               FontSize="16"
+                               Grid.Column="1"
+                               Grid.Row="0"
+                               Grid.RowSpan="2"/>
+                <!--<TextBlock Margin="20,0"
+                           Grid.Column="2"
+                           Foreground="Gray"
+                           VerticalAlignment="Bottom" 
+                           Text="Expires on:"
+                           Grid.Row="0"/>
+                <TextBlock Margin="20,0"
+                           Grid.Column="2"
+                           Foreground="Gray"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top" 
+                           Text="{Binding Promotion.EndTime, StringFormat=d}"
+                           Grid.Row="1"/>-->
+            </Grid>
+            <Separator Background="LightGray"
+                       Margin="0"
+                       VerticalAlignment="Bottom"
+                       Grid.Row="1"/>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="StoreListItemDataTemplate">
+        <DataTemplate.Resources>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <converters:StoreIdToVisibilityConverter x:Key="StoreIdToVisibilityConverter"/>
+        </DataTemplate.Resources>
+        <Grid Margin="20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>       
+            <Grid VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+               
+                <TextBlock Text="{Binding Title}"
+                               TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Center" 
+                           HorizontalAlignment="Stretch"
+                           FontWeight="Medium"
+                           Grid.Column="1"
+                               FontSize="16"
+                               Grid.Row="0"/>
+                <TextBlock Text="{Binding Address}"
+                               TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Center" 
+                           HorizontalAlignment="Stretch"
+                           FontWeight="Medium"
+                           Grid.Column="1"
+                               FontSize="16"
+                               Grid.Row="1"/>
+                <TextBlock Text="{Binding PhoneNumber}"
+                               TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Center" 
+                           HorizontalAlignment="Stretch"
+                           Grid.Column="1"
+                           FontWeight="Medium"
+                               FontSize="16"
+                               Grid.Row="2"/>
+                <controls:ImageButton ImagePath="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z"
+                                      Width="64"
+                                      Height="64"
+                                      Visibility="{Binding IsMouseOver, RelativeSource={RelativeSource FindAncestor, AncestorType=ListViewItem}, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                      Foreground="#2E4051"
+                                      SecondaryColor="White"
+                                      Command="{Binding DataContext.ShowStoreInfoCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}}"
+                                      CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListViewItem}}"
+                                      Style="{DynamicResource TransparentNoTextButton}"
+                                      Grid.Column="3"
+                                      Grid.RowSpan="3"
+                                      Grid.Row="0"/>
+
+                <Viewbox Width="36" 
+                         Height="36"
+                         Grid.Column="4"
+                         Grid.RowSpan="3"
+                         Grid.Row="0">
+                    <Canvas Width="24" Height="24">
+                        <Path Data="M12,3L2,12H5V20H19V12H22L12,3M12,7.7C14.1,7.7 15.8,9.4 15.8,11.5C15.8,14.5 12,18 12,18C12,18 8.2,14.5 8.2,11.5C8.2,9.4 9.9,7.7 12,7.7M12,10A1.5,1.5 0 0,0 10.5,11.5A1.5,1.5 0 0,0 12,13A1.5,1.5 0 0,0 13.5,11.5A1.5,1.5 0 0,0 12,10Z" 
+                              Fill="IndianRed" />
+                    </Canvas>
+                    <Viewbox.Visibility>
+                        <MultiBinding Converter="{StaticResource StoreIdToVisibilityConverter}">
+                            <Binding Path="StoreId"/>
+                            <Binding Path="DataContext.PreferedStore" RelativeSource="{RelativeSource FindAncestor, AncestorType=ListView}"/>
+                        </MultiBinding>
+                    </Viewbox.Visibility>
+                </Viewbox>
+            </Grid>
+            <Separator Background="LightGray"
+                       Margin="0"
+                       VerticalAlignment="Bottom"
+                       Grid.Row="1"/>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="OffersItemDataTemplate">
+        <DataTemplate.Resources>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <converters:StoreIdToVisibilityConverter x:Key="StoreIdToVisibilityConverter"/>
+            <converters:BoolToReverseVisiblityConverter x:Key="BoolToReverseVisiblityConverter"/>
+            <converters:BoolToReverseBoolConverter x:Key="BoolToReverseBoolConverter"></converters:BoolToReverseBoolConverter>
+        </DataTemplate.Resources>
+        <Grid Margin="5,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0"
+                  Margin="0,0,5,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Image Source="{Binding Image, TargetNullValue={StaticResource OfferDrawingImage}}"
+                           Stretch="Uniform"
+                           HorizontalAlignment="Stretch"
+                           Margin="10,5"
+                           Grid.Row="0"/>
+                    <Button Content="Add to Wallet"
+                            Command="{Binding AddToWalletCommand}"
+                            Visibility="{Binding IsInWallet, Converter={StaticResource BoolToReverseVisiblityConverter}}"
+                            Height="22"
+                            FontSize="12"
+                            Margin="5,5"
+                            Width="100"
+                            HorizontalAlignment="Center"
+                            Grid.Row="1"/>
+                    <Button Content="{Binding AddToListCommandText, UpdateSourceTrigger=PropertyChanged}"
+                            Visibility="{Binding IsInWallet, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            IsEnabled="{Binding IsInList, Converter={StaticResource BoolToReverseBoolConverter}}"
+                            Height="22"
+                            FontSize="12"
+                            Margin="5,5"
+                            Width="100"
+                            Background="Gray"
+                            Command="{Binding AddToListCommand}"
+                            HorizontalAlignment="Center"
+                            Grid.Row="1"/>
+                </Grid>
+                <Grid Grid.Column="1"
+                  Margin="5,0,0,0"
+                  VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding Description}"
+                           TextTrimming="CharacterEllipsis"
+                           VerticalAlignment="Center" 
+                           TextWrapping="Wrap"
+                           HorizontalAlignment="Stretch"
+                           FontWeight="SemiBold"
+                           FontSize="16"
+                           Grid.Row="0"/>
+
+                    <TextBlock Text="{Binding Information}"
+                           TextTrimming='CharacterEllipsis'
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Stretch"
+                           FontSize="12"
+                           Grid.Row="1"/>
+
+                    <TextBlock  Foreground="Gray"
+                           HorizontalAlignment="Right" 
+                           VerticalAlignment="Bottom" 
+                           Grid.Row="2">
+                        <Run Text="Expires on:"/>
+                        <Run  Text="{Binding EndDate, StringFormat=d, Mode=OneWay}"/>
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Right" 
+                               Foreground="#007a98"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               Text="{Binding SavingValue, StringFormat='Save {0:C2}'}"
+                               Grid.Row="3"/>
+                </Grid>
+
+            </Grid>
+            <Separator Background="LightGray"
+                       Margin="0"
+                       VerticalAlignment="Bottom"
+                       Grid.Row="1"/>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

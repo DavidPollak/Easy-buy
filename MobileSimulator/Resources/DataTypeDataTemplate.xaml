@@ -1,0 +1,129 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewmodels="clr-namespace:MobileSimulator.ViewModels.ViewModels;assembly=MobileSimulator.ViewModels"
+                    xmlns:userControls="clr-namespace:MobileSimulator.Views.UserControls;assembly=MobileSimulator.Views"
+                    xmlns:brm="clr-namespace:MobileSimulator.ViewModels.ViewModels.BRM;assembly=MobileSimulator.ViewModels"
+                    xmlns:brmActions="clr-namespace:MobileSimulator.Views.UserControls.BrmActions;assembly=MobileSimulator.Views"
+                    xmlns:ageRestriction="clr-namespace:MobileSimulator.ViewModels.ViewModels.BRM.Action.AgeRestriction;assembly=MobileSimulator.ViewModels"
+                    xmlns:businessRule="clr-namespace:MobileSimulator.ViewModels.ViewModels.BRM.Action.BusinessRule;assembly=MobileSimulator.ViewModels">
+    <DataTemplate DataType="{x:Type viewmodels:RegisterViewModel}">
+        <userControls:RegisterView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:SignInViewModel}">
+        <userControls:SignInView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:ScanBarcodeViewModel}">
+        <userControls:ScanBarcodeView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:ScanQRBarcodeViewModel}">
+        <userControls:ScanQRBarcodeView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:AlertDialogViewModel}">
+        <userControls:AlertDialogView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:ConfirmationDialogViewModel}">
+        <userControls:ConfirmationDialogView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
+        <userControls:LoginView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:WelcomeViewModel}">
+        <userControls:WelcomeView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:SaleViewModel}">
+        <userControls:SaleView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:ChangePasswordViewModel}">
+        <userControls:ChangePasswordView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:StoreQRCodeViewModel}">
+        <userControls:StoreQRCodeView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:PayViewModel}">
+        <userControls:PayView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:EndOfTripBarcodeViewModel}">
+        <userControls:EndOfTripBarcodeView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:ShoppingListsViewModel}">
+        <userControls:ShoppingListsView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:AddTextDialogViewModel}">
+        <userControls:AddTextDialog />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:ShoppingListDetailsViewModel}">
+        <userControls:ShoppingListDetailsView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:MyAccountViewModel}">
+        <userControls:MyAccountView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:StoreLocatorViewModel}">
+        <userControls:StoreLocatorView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:StoreInfoViewModel}">
+        <userControls:StoreInfoView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:OffersViewModel}">
+        <userControls:OffersView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:LoyaltyViewModel}">
+        <userControls:LoyaltyView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:WalletViewModel}">
+        <userControls:WalletView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:CouponsViewModel}">
+        <userControls:CouponsView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:WeeklyAdsViewModel}">
+        <userControls:CouponsView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:ReceiptsViewModel}">
+        <userControls:ReceiptsView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:ReceiptImageViewModel}">
+        <userControls:ReceiptImageView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:MPosSignInViewModel}">
+        <userControls:MPosSignInView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:MPosRegisterViewModel}">
+        <userControls:MPosRegisterView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:MPosLoginViewModel}">
+        <userControls:MPosLoginView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:MPosWelcomeViewModel}">
+        <userControls:MPosWelcomeView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type brm:RuleActionPromptViewModel}">
+        <brmActions:RuleActionPromptView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type ageRestriction:AgeRestrictionMissingInputActionViewModel}">
+        <brmActions:AgeRestrictionMissingInputActionView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type ageRestriction:AgeRestrictionProhibitViewModel}">
+        <brmActions:AgeRestrictionProhibitView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type ageRestriction:AgeRestrictionManagerApprovalActionViewModel}">
+        <brmActions:AgeRestrictionManagerApprovalActionView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type businessRule:BusinessRuleReasonCodeRequiredActionViewModel}">
+        <brmActions:BusinessRuleReasonCodeRequiredActionView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type businessRule:BusinessRuleConfirmationRequiredActionViewModel}">
+        <brmActions:BusinessRuleConfirmationRequiredActionView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type businessRule:BusinessRuleApprovalRequiredActionViewModel}">
+        <brmActions:BusinessRuleApprovalRequiredActionView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type businessRule:BusinessRuleNotificationActionViewModel}">
+        <brmActions:BusinessRuleNotificationActionView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type businessRule:BusinessRuleProhibitActionViewModel}">
+        <brmActions:BusinessRuleProhibitActionView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type businessRule:BusinessRuleShopperIdentificationRequiredActionViewModel}">
+        <brmActions:BusinessRuleShopperIdentificationRequiredActionView />
+    </DataTemplate>
+</ResourceDictionary>
